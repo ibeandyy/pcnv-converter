@@ -47,7 +47,7 @@ export const execute = async (interaction: ChatInputCommandInteraction) => {
     //split response into several arrays of 2000 characters
     let responseArray = [];
     let responseString = "";
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 10; i++) {
       if (responseString.length + response[i].length > 2000) {
         if (i == 10) responseString == "Remaining 6000 wallets receive < 1 CNV";
         responseArray.push(responseString);
