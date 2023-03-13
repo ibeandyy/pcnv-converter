@@ -47,24 +47,28 @@ export const execute = async (interaction: ChatInputCommandInteraction) => {
     //split response into several arrays of 2000 characters
     let responseArray = [];
     let responseString = "";
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < response.length; i++) {
       if (responseString.length + response[i].length > 2000) {
-        if (i == 10) responseString == "Remaining 6000 wallets receive < 1 CNV";
         responseArray.push(responseString);
         responseString = "";
       }
       responseString += response[i];
     }
     responseArray.push(responseString);
-    for (let i = 0; i < responseArray.length; i++) {
+    for (let i = 0; i < 10; i++) {
       if (i == 0)
         await interaction.reply({
           content: responseArray[i],
           ephemeral: true,
         });
       else
-        interaction.followUp({
+        await interaction.followUp({
           content: responseArray[i],
+          ephemeral: true,
+        });
+      if (i == 10)
+        interaction.followUp({
+          content: "Remaining wallets are set to receive <1 CNV",
           ephemeral: true,
         });
     }
